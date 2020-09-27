@@ -3,6 +3,9 @@ MAINTAINER Sho Mizutani <lowply@gmail.com>
 
 WORKDIR /home
 RUN apk update && apk add --no-cache g++ musl-dev make
-RUN gem install jekyll bundler
+RUN gem install jekyll
 
-CMD ["jekyll", "serve", "-H", "0.0.0.0", "-P", "4000"]
+# This is a workaround to make this container work for both jekyll new and jekyll serve.
+RUN jekyll new /tmp
+
+CMD ["jekyll", "--help"]
